@@ -41,7 +41,7 @@ class Graph:
         return edgeLens
 
     # Takes two strings as parameters
-    # Djikstra's Algorithm
+    # Dijkstra's Algorithm
     def shortestPath(self, start, stop):
 
         q = self.getVerticies()
@@ -70,7 +70,7 @@ class Graph:
 
         return dist[self.getIndexByVertex(stop)]
 
-    #Helper method which calculates the lowest index node not visited
+    # Helper method which calculates the lowest index node not visited
     def lowestUnvisitedDistanceIndex(self, distances, visited):
         result = 0
         resVal = 100**100
@@ -80,7 +80,7 @@ class Graph:
                 resVal = distances[i]
         return result
 
-    #Helper method which gets unvisited neighbors
+    # Helper method which gets unvisited neighbors
     # Keep in mind that vertex is a string
     # Also keep in mind that this returns a list of TUPLES
     # - containing a string representing the vertex
