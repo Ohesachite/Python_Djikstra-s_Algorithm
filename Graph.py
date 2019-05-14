@@ -40,16 +40,37 @@ class Graph:
                     edgeLens.append(vertex[1])
         return edgeLens
 
+    def hasPath(self, start, stop, visited):
+        visited[self.getIndexByVertex(start)] = True
+        if start == stop:
+            return True
+        elif len(self.getUnvisitedNeighbors(start, visited)) == 0:
+            return False
+        else:
+            result = False
+            for vertex in self.getUnvisitedNeighbors(start, visited):
+                if self.hasPath(vertex[0], stop, visited) is True:
+                    result = True
+            return result
+
     # Takes two strings as parameters
     # Dijkstra's Algorithm
     def shortestPath(self, start, stop):
 
         q = self.getVerticies()
 
+        assert len(q) >= 2, "Graph must have at least two nodes"
+        assert len(self.getEdges()) >= 1, "Graph must have at least one edge"
+        assert start != stop, "Start cannot be the same node as stop"
+        v = []
+        for _ in q:
+            v.append(False)
+        assert self.hasPath(start, stop, v) is True, "No path exists"
+
         dist = []
         visited = []
         for vertex in q:
-            if(vertex == start):
+            if vertex == start:
                 dist.append(0)
             else:
                 dist.append(100**100)
@@ -75,7 +96,7 @@ class Graph:
         result = 0
         resVal = 100**100
         for i in range(len(distances)):
-            if distances[i] < resVal and visited[i] == False:
+            if distances[i] < resVal and visited[i] is False:
                 result = i
                 resVal = distances[i]
         return result
@@ -88,6 +109,6 @@ class Graph:
     def getUnvisitedNeighbors(self, vertex, visited):
         unvisited = []
         for neighbor in self.gdict[vertex]:
-            if visited[self.getIndexByVertex(neighbor[0])] == False:
+            if visited[self.getIndexByVertex(neighbor[0])] is False:
                 unvisited.append(neighbor)
         return unvisited

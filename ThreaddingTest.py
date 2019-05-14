@@ -21,7 +21,9 @@ class testThread(threading.Thread):
 thread1 = testThread(1, 1)
 thread2 = testThread(2, 2)
 thread3 = testThread(3, 3)
+thread4 = testThread(4, 4)
 
 thread1.start()
 thread2.start()
 thread3.start()
+thread4.start()

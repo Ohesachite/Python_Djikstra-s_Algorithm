@@ -34,14 +34,31 @@ if(__name__ == "__main__"):
         "stop": [("start", 100)]
     }
 
+    graph_elements4 = {
+        "start": [("a", 1)],
+        "a": [("start", 1)],
+        "b": [("stop", 1)],
+        "stop": [("b", 1)]
+    }
+
     g1 = Graph(graph_elements1)
     g2 = Graph(graph_elements2)
     g3 = Graph(graph_elements3)
+    g4 = Graph(graph_elements4)
 
     # Method tests
     # print(g1.getVerticies())
     # print(g1.getEdges())
     # print(g1.getEdgeLengths())
-    print(g1.shortestPath("start", "stop"))
-    print(g2.shortestPath("start", "stop"))
-    print(g3.shortestPath("start", "stop"))
+    # visited = []
+    # for _ in g2.getVerticies():
+    #     visited.append(False)
+    # print(g1.hasPath("start", "stop", visited))
+    # print(g1.shortestPath("start", "stop"))
+    # print(g2.hasPath("start", "stop", visited))
+    # print(g2.shortestPath("start", "stop"))
+    # print(g3.hasPath("start", "stop", visited))
+    # print(g3.shortestPath("start", "stop"))
+    # print(g4.hasPath("start", "stop", visited))
+    # This next line should throw an AssertionError
+    # print(g4.shortestPath("start", "stop"))
