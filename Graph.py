@@ -90,7 +90,7 @@ class Graph:
             visited[verInd] = True
 
         for i in range(len(q)):
-            assert visited[i] < 100**100
+            assert dist[i] < 100**100 or visited[i] == False
         return dist[self.getIndexByVertex(stop)]
 
     # Helper method which calculates the lowest index node not visited
