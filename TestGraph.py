@@ -54,11 +54,11 @@ if(__name__ == "__main__"):
     # for _ in g2.getVerticies():
     #     visited.append(False)
     # print(g1.hasPath("start", "stop", visited))
-    # print(g1.shortestPath("start", "stop"))
+    print(g1.shortestPath("start", "stop"))
     # print(g2.hasPath("start", "stop", visited))
-    # print(g2.shortestPath("start", "stop"))
+    print(g2.shortestPath("start", "stop"))
     # print(g3.hasPath("start", "stop", visited))
-    # print(g3.shortestPath("start", "stop"))
+    print(g3.shortestPath("start", "stop"))
     # print(g4.hasPath("start", "stop", visited))
     # This next line should throw an AssertionError
     # print(g4.shortestPath("start", "stop"))

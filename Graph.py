@@ -89,6 +89,8 @@ class Graph:
 
             visited[verInd] = True
 
+        for i in range(len(q)):
+            assert visited[i] < 100**100
         return dist[self.getIndexByVertex(stop)]
 
     # Helper method which calculates the lowest index node not visited
