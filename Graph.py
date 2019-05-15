@@ -90,8 +90,14 @@ class Graph:
             visited[verInd] = True
 
         for i in range(len(q)):
-            assert dist[i] < 100**100 or visited[i] == False
+            assert dist[i] < 100**100 or visited[i] is False
         return dist[self.getIndexByVertex(stop)]
+
+    def shortestPathMultithreaded(self, start, stop):
+
+        # Nope too hard
+
+        return
 
     # Helper method which calculates the lowest index node not visited
     def lowestUnvisitedDistanceIndex(self, distances, visited):
