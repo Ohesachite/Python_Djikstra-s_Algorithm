@@ -59,9 +59,9 @@ class Graph:
 
         q = self.getVerticies()
 
-        assert len(q) >= 2, "Graph must have at least two nodes"
-        assert len(self.getEdges()) >= 1, "Graph must have at least one edge"
-        assert start != stop, "Start cannot be the same node as stop"
+        assert len(q) > 0, "Graph must have at least one nodes"
+        for e in self.getEdgeLengths():
+            assert e >= 0, "Cannot have negative edge lengths"
         v = []
         for _ in q:
             v.append(False)
@@ -89,8 +89,35 @@ class Graph:
 
             visited[verInd] = True
 
-        for i in range(len(q)):
-            assert dist[i] < 100**100 or visited[i] is False
+        # Proof of correctness by induction
+
+        v = []
+        for _ in q:
+            v.append(False)
+
+        for _ in range(len(q)):
+            # Base Case
+            verInd = self.lowestUnvisitedDistanceIndex(dist, v)
+            if self.getVertexByIndex(verInd) == start:
+                assert dist[self.getIndexByVertex(start)] == 0, "Algorithm not correct, base case is incorrect"
+                v[verInd] = True
+            else:
+                # lowestDistInd gets the index of the unvisited node with the lowest distance from the start
+                # The inductive step gets the closest neighbor
+                # And checks that the distance from the closest neighbor plus the distance from that neighbor to the start is greater than or equal to the node's distance from the start
+                uNeighbors = self.getVisitedNeighbors(self.getVertexByIndex(verInd), v)
+
+                # Find closest visited node in terms of distance
+                closestDistance = 100**100
+                closestNode = None
+                for u in uNeighbors:
+                    if u[1] < closestDistance:
+                        closestNode = u[0]
+                        closestDistance = u[1]
+
+                # Inductive Step
+                assert dist[self.getIndexByVertex(closestNode)] + closestDistance >= dist[verInd]
+
         return dist[self.getIndexByVertex(stop)]
 
     def shortestPathMultithreaded(self, start, stop):
@@ -120,3 +147,10 @@ class Graph:
             if visited[self.getIndexByVertex(neighbor[0])] is False:
                 unvisited.append(neighbor)
         return unvisited
+
+    def getVisitedNeighbors(self, vertex, visited):
+        result = []
+        for neighbor in self.gdict[vertex]:
+            if visited[self.getIndexByVertex(neighbor[0])] is True:
+                result.append(neighbor)
+        return result
